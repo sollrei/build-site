@@ -15,6 +15,8 @@ import ImageGallery from './components/ImageGallery';
 import Footer from './components/Footer';
 
 import Menu from './edit/Menu';
+import EditContent from './edit/EditContent';
+import {editSection} from './action';
 
 import './index.css';
 import './style.css';
@@ -23,21 +25,41 @@ class App extends Component {
 
     render() {
 
-        console.log(this.props);
+        const {dispatch, slide, primary, full, leftContent, imageGallery, rightContent} = this.props;
 
         return (
             <div className="app-wrap">
                 <div className="App">
                     <Header />
-                    <Gallery slide={this.props.slide}/>
-                    <PrimarySection />
-                    <FullWidth />
-                    <LeftContent />
-                    <ImageGallery />
-                    <RightContent />
+                    <Gallery
+                        data={slide}
+                    />
+                    <PrimarySection
+                        data={primary}
+                        onClick={(id) => {
+                            dispatch(editSection({
+                                type: 'primary',
+                                id: id
+                            }))
+                        }}
+                    />
+                    <FullWidth
+                        section={full.section}
+                        data={full.data}
+                    />
+                    <LeftContent
+                        data={leftContent}
+                    />
+                    <ImageGallery
+                        data={imageGallery}
+                    />
+                    <RightContent
+                        data={rightContent}
+                    />
                     <Footer />
                 </div>
                 <Menu />
+                <EditContent {...this.props} />
             </div>
         );
     }

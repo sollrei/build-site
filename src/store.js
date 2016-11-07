@@ -32,8 +32,13 @@ function slide (state = initial.slide, action) {
 
 function primary (state = initial.primary, action) {
     switch (action.type) {
-        case 'CHANGE_SLIDE':
-            return state;
+        case 'EDIT_PRIMARY':
+            return state.map((item) => {
+                if (item.id === action.data.id) {
+                    return Object.assign({}, item, action.data);
+                }
+                return item;
+            });
         default:
             return state;
     }
@@ -75,8 +80,24 @@ function rightContent (state = initial.rightContent, action) {
     }
 }
 
+function editContent (state = initial.editContent, action) {
+    switch (action.type) {
+        case 'EDIT_CONTENT':
+            return {
+                edit: true,
+                data: action.data
+            };
+        case 'CLOSE_EDIT':
+            return {
+                edit: false
+            };
+        default:
+            return state;
+    }
+}
 
-let reducer = combineReducers({user, slide, primary, full, leftContent, imageGallery, rightContent});
+
+let reducer = combineReducers({user, slide, primary, full, leftContent, imageGallery, rightContent, editContent});
 
 let store = createStore(reducer, initial);
 

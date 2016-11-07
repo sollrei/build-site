@@ -1,32 +1,31 @@
 import React from 'react';
 
-const RightContent = () => {
+const RightContent = ({data}) => {
     return (
-        <section className="app-right-content">
+        <section className="app-right-content app-column2">
             <div className="layout">
                 <div className="right">
-                    <h3 className="title">What Are You Waiting For? <br/> StartIt Today!</h3>
-                    <p className="content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sediam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat</p>
+                    <h3 className="title">{data.title}</h3>
+                    <p className="content">{data.content}</p>
                     <div className="app-flex">
                         <div className="flex-item">
-                            <p>Make a difference</p>
-                            <p>Unmatched power</p>
-                            <p>Retina ready</p>
+                            {
+                                data.list.slice(0,3).map((item, index) => <p key={index}>{item}</p>)
+                            }
                         </div>
                         <div className="flex-item">
-                            <p>Satisfied clients</p>
-                            <p>Control the design</p>
-                            <p>Imagine and create</p>
+                            {
+                                data.list.slice(3).map((item, index) => <p key={index}>{item}</p>)
+                            }
                         </div>
                     </div>
                 </div>
                 <div className="left app-image">
                     <img width="551"
                          height="500"
-                         src="http://startit.select-themes.com/wp-content/uploads/2015/10/image-1-home-main.jpg"
+                         src={data.image}
                          className="image"
                          alt="a"
-                         srcSet="http://startit.select-themes.com/wp-content/uploads/2015/10/image-1-home-main.jpg 525w, http://startit.select-themes.com/wp-content/uploads/2015/10/image-1-home-main-300x273.jpg 300w"
                          sizes="(max-width: 551px) 100vw, 551px" />
                 </div>
             </div>

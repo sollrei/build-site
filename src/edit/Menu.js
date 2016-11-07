@@ -24,7 +24,13 @@ export default class Menu extends Component {
 
         eleStyle.innerHTML = `.theme-ft-color { color: ${color}; }
             .theme-bg-color { background-color: ${color}; }
-            .app-nav .active { background: ${color}; }`;
+            .app-column2 p:after { background-color: ${color}; }
+            .app-nav .active { background: ${color}; }
+            .owl-theme .owl-controls .owl-page.active span,
+            .owl-theme .owl-controls.clickable .owl-page:hover span{
+                background-color: ${color}!important;
+            }
+            .edit-trigger .icon-rotate .icon-set {color: ${color}}`;
         
     }
 
@@ -48,7 +54,7 @@ export default class Menu extends Component {
                     </div>
                 </div>
                 <nav className="nav">
-                    <p className="title">配色</p>
+                    <p className="title">主题配色</p>
                     <ul className="color" onClick={(e) => {
                         if (e.nativeEvent.target.nodeName === 'LI') {
                             const _index = Number(e.nativeEvent.target.getAttribute('data-index'));

@@ -1,25 +1,11 @@
 import React, {Component} from 'react';
 
-import $ from '../plugin/owl-carousel';
-
+import OwlCarousel from 'react-owl-carousel';
 class Gallery extends Component {
-
-    componentDidMount () {
-
-        $("#owl-demo").owlCarousel({
-            slideSpeed: 300,
-            paginationSpeed: 400,
-            singleItem: true,
-            autoPlay: true,
-            loop: true,
-            addClassActive: true
-        });
-
-    }
 
     render () {
 
-        let dom = this.props.slide.map((item, index) =>
+        let dom = this.props.data.map((item, index) =>
             {
                 const img = 'url(' + item.image + ')';
                 return <div key={index} className="item">
@@ -34,12 +20,18 @@ class Gallery extends Component {
             }
         );
 
-        console.log(this.props.slide, 'i am gallery');
-
         return (
             <div className="app-gallery">
-                <div id="owl-demo" className="owl-carousel owl-theme">
-                    {dom}
+                <div id="owl-demo" >
+                    <OwlCarousel className="owl-carousel owl-theme"
+                         slideSpeed={300}
+                         singleItem
+                         autoPlay
+                         loop
+                         addClassActive
+                    >
+                        {dom}
+                    </OwlCarousel>
                 </div>
             </div>
         )

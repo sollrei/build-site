@@ -1,5 +1,5 @@
 $color: #b4de50;
-
+$editColor: #4791ff;
 /* theme */
 .theme-ft-color {
     color: $color;
@@ -173,6 +173,15 @@ $color: #b4de50;
     }
 }
 
+.owl-theme .owl-controls .owl-page span {
+    background-color: #fff;
+}
+
+.owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span{
+    opacity: .7;
+    background-color: $color!important;
+}
 
 /* header */
 
@@ -297,19 +306,8 @@ $color: #b4de50;
         width: 50%;
         box-sizing: border-box;
         padding: 70px 0 0 50px;
-        .title {
-            font-size: 30px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        .content {
-            font-size: 18px;
-            margin-bottom: 30px;
-        }
-        .flex-item {
-            line-height: 2;
-        }
     }
+
 }
 
 .app-right-content {
@@ -320,17 +318,35 @@ $color: #b4de50;
         width: 50%;
         box-sizing: border-box;
         padding: 70px 0 0 50px;
-        .title {
-            font-size: 30px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        .content {
-            font-size: 18px;
-            margin-bottom: 30px;
-        }
-        .flex-item {
-            line-height: 2;
+
+    }
+}
+
+.app-column2 {
+    .title {
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+    .content {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+    .flex-item {
+        line-height: 2;
+    }
+
+    p {
+        padding-left: 15px;
+        position: relative;
+        &:after {
+            position: absolute;
+            left: 0;
+            top: 9px;
+            background-color: $color;
+            content: '';
+            height: 4px;
+            width: 4px;
         }
     }
 }
@@ -415,9 +431,7 @@ $color: #b4de50;
     background: #fff;
     transform: translate3d(-100px, 0, 0);
     transition: transform .3s;
-
-
-
+    
     .edit-trigger {
         position: absolute;
         height: 40px;
@@ -439,6 +453,7 @@ $color: #b4de50;
         }
         .icon-set {
             font-size: 18px;
+            color: $color;
         }
         .icon-rotate {
             height: 100%;
@@ -479,4 +494,103 @@ $color: #b4de50;
     100% {
         transform: rotate(360deg);
     }
+}
+
+.edit-box {
+    position: fixed;
+    right: 10px;
+    height: 90vh;
+    width: 300px;
+    background: #fff;
+    box-sizing: border-box;
+    top: 5vh;
+    z-index: 800;
+    overflow-y: auto;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 0 4px rgba(0,0,0,.4);
+    transform: translate3d(300px,0,0);
+    opacity: 0;
+    transition: transform .5s, opacity .5s;
+
+    .close {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        height: 30px;
+        width: 30px;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+    }
+
+    .edit-title {
+        font-size: 18px;
+    }
+    .title-edit,
+    .content-edit {
+        font-size: 14px;
+        border: 0;
+        width: 100%;
+        border-bottom: 1px solid #ededed;
+        height: auto;
+        min-height: 30px;
+        line-height: 1.7;
+        max-height: 100px;
+        &:focus {
+            outline: none;
+            border-color: $editColor;
+
+        }
+        resize: none;
+        overflow: hidden;
+    }
+
+    .title-edit {
+        white-space: nowrap;
+        height: 30px;
+    }
+
+}
+
+.show {
+    transform: translate3d(0,0,0);
+    opacity: 1;
+}
+
+.edit-wrap {
+    position: relative;
+    &:hover {
+        .edit-trigger {
+            display: block;
+        }
+    }
+    .edit-trigger {
+        position: absolute;
+        box-sizing: border-box;
+        border: 1px solid $editColor;
+        height: 100%;
+        width: 100%;
+        display: none;
+        top: 0;
+        left: 0;
+    }
+    .button {
+        display: inline-block;
+        width: 40px;
+        height: 26px;
+        color: #fff;
+        background-color: $editColor;
+        cursor: pointer;
+        position: absolute;
+        left: 50%;
+        margin-left: -20px;
+        text-align: center;
+        line-height: 26px;
+    }
+
+}
+
+.edit-section {
+    margin-bottom: 20px;
 }
