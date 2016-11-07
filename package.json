@@ -6,6 +6,7 @@
     "react-scripts": "0.7.0"
   },
   "dependencies": {
+    "alloyeditor": "^1.2.5",
     "gulp": "^3.9.1",
     "gulp-ruby-sass": "^2.1.0",
     "gulp-sass": "^2.3.2",

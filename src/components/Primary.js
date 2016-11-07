@@ -13,7 +13,6 @@ export default class PrimarySection extends Component {
                 <h3>{item.title}</h3>
                 <p>{item.content}</p>
                 <EditTrigger onClick={() => {
-                    console.log(item.id)
                     this.props.onClick(item.id);
                 }} />
             </div>

@@ -1,6 +1,8 @@
 import {combineReducers, createStore} from 'redux';
 
-let initial = window.siteData;
+let storage = window.localStorage.getItem('siteData');
+
+let initial = storage ? JSON.parse(storage) : window.siteData;
 
 function user (state = initial.user, action) {
     switch (action.type) {

@@ -1,5 +1,12 @@
 $color: #b4de50;
 $editColor: #4791ff;
+strong {
+    font-weight: 700;
+}
+em {
+    font-style: italic;
+    font-weight: inherit;
+}
 /* theme */
 .theme-ft-color {
     color: $color;
@@ -322,6 +329,16 @@ $editColor: #4791ff;
     }
 }
 
+.editor-wrapper {
+    box-sizing: border-box;
+    padding: 1px;
+    &:focus {
+        outline: none;
+        padding: 0;
+        border: 1px solid $editColor;
+    }
+}
+
 .app-column2 {
     .title {
         font-size: 30px;
@@ -593,4 +610,16 @@ $editColor: #4791ff;
 
 .edit-section {
     margin-bottom: 20px;
+}
+
+.save {
+    position: fixed;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 3px;
+    padding: 10px 20px;
+    background-color: $editColor;
+    color: #fff;
+    z-index: 600;
+    cursor: pointer;
 }

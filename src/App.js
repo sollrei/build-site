@@ -25,10 +25,16 @@ class App extends Component {
 
     render() {
 
-        const {dispatch, slide, primary, full, leftContent, imageGallery, rightContent} = this.props;
+        const {getState, dispatch, slide, primary, full, leftContent, imageGallery, rightContent} = this.props;
 
         return (
             <div className="app-wrap">
+                <div className="save"
+                     onClick={() => {
+                         const data = getState();
+                         window.localStorage.setItem('siteData', JSON.stringify(data))
+                     }}
+                >保存设置</div>
                 <div className="App">
                     <Header />
                     <Gallery
