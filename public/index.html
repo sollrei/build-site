@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <title>React App</title>
+    <link rel="stylesheet" href="http://static.gcimg.net/atm/common/alice/1.0.0/src/alice_48125fc.css">
+    <link rel="stylesheet" href="./plugin/owl.carousel.css">
+    <link rel="stylesheet" href="./plugin/owl.theme.css">
+
+</head>
+<body>
+<div class="wrap">
+    <div class="container" id="root"></div>
+</div>
+<script>
+    var siteData = {
+        slide: [{
+            id: 1,
+            image: 'http://startit.select-themes.com/wp-content/uploads/2015/11/home-main-slide-1.jpg',
+            title: ['Why Wait!', 'Start Right Now!'],
+            content: 'Everything is mobile, and so is StartIt. Fully responsive and retina ready, StartIt will look simply awesome on all devices and screen sizes. '
+        },{
+            id: 2,
+            image: 'http://startit.select-themes.com/wp-content/uploads/2015/11/home-main-slide-2.jpg',
+            title: ['Design The Website','In Your Image'],
+            content: 'Everything is mobile, and so is StartIt. Fully responsive and retina ready, StartIt will look simply awesome on all devices and screen sizes. '
+        },{
+            id: 3,
+            image: 'http://startit.select-themes.com/wp-content/uploads/2015/11/home-main-slide-3.jpg',
+            title: ['A Startup Theme','Like No Other'],
+            content: 'Everything is mobile, and so is StartIt. Fully responsive and retina ready, StartIt will look simply awesome on all devices and screen sizes. '
+        },{
+            id: 4,
+            image: 'http://startit.select-themes.com/wp-content/uploads/2015/11/home-main-slide-4.jpg',
+            title: ['A Startup Theme','Like No Other'],
+            content: 'Everything is mobile, and so is StartIt. Fully responsive and retina ready, StartIt will look simply awesome on all devices and screen sizes. '
+        }],
+        primary: [{
+            id: 1,
+            title: 'Pixel-Perfect Design',
+            content: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut',
+            icon: 'icon-training'
+        },{
+            id: 2,
+            title: 'Free Plugins Included',
+            content: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut',
+            icon:  'icon-all'
+        },{
+            id: 3,
+            title: 'Extensive Documentation',
+            content: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut',
+            icon: 'icon-clock'
+        },{
+            id: 4,
+            title: 'WooCommerce',
+            content: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut',
+            icon: 'icon-form'
+        }],
+        full: {
+            section: {
+                title: 'A Startup Theme Like No Other',
+                img: 'http://startit.select-themes.com/wp-content/uploads/2015/10/parallax-2-home-main.jpg',
+                desc: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam'
+            },
+            data: [{
+                id: 1,
+                title: '"Super support!"',
+                content: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad'
+            },{
+                id: 2,
+                title: '"Super support!"',
+                content: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad'
+            },{
+                id: 3,
+                title: '"Super support!"',
+                content: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad'
+            }]
+        },
+        leftContent: {
+            title: 'What Are You Waiting For? StartIt Today!',
+            content: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sediam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat',
+            list: ['Make a difference', 'Unmatched power', 'Retina ready', 'Satisfied clients', 'Control the design', 'Imagine and create'],
+            image: 'http://startit.select-themes.com/wp-content/uploads/2015/10/image-2-home-main.jpg'
+        },
+        imageGallery: [{
+            id: 1,
+            img: 'http://startit.select-themes.com/wp-content/uploads/2015/10/p-office-management-systems-800x600.jpg',
+            title: 'Project',
+            content: 'Odf / Janny'
+        }, {
+            id: 2,
+            img: 'http://startit.select-themes.com/wp-content/uploads/2015/10/p-new-trends-in-seo-and-analytics-800x600.jpg',
+            title: 'Take Join',
+            content: 'Jdf / Serrl'
+        }, {
+            id: 3,
+            img: 'http://startit.select-themes.com/wp-content/uploads/2015/10/p-app-update-and-rebrand-800x600.jpg',
+            title: 'May Jee L',
+            content: 'Danc / teach'
+        },{
+            id: 4,
+            img: 'http://startit.select-themes.com/wp-content/uploads/2015/10/p-the-tablet-app-of-the-future-800x600.jpg',
+            title: 'Have Fun',
+            content: 'Iris / Viewl'
+        },{
+            id: 5,
+            img: 'http://startit.select-themes.com/wp-content/uploads/2015/10/p-big-data-goes-global-800x600.jpg',
+            title: 'Page View',
+            content: 'A / D.Jsdf'
+        }, {
+            id: 6,
+            img: 'http://startit.select-themes.com/wp-content/uploads/2015/10/p-new-findings-in-responsive-testing-800x600.jpg',
+            title: 'Component View',
+            content: 'A / Day'
+        }, {
+            id: 7,
+            img: 'http://startit.select-themes.com/wp-content/uploads/2015/10/p-millenials-research-2015-800x600.jpg',
+            title: 'Life Cycle',
+            content: 'Resf / Nice'
+        }, {
+            id: 8,
+            img: 'http://startit.select-themes.com/wp-content/uploads/2015/10/p-new-trends-in-social-media-800x600.jpg',
+            title: 'New Website',
+            content: 'Joiny / Tack'
+        }],
+        rightContent: {
+            title: 'What Are You Waiting For? StartIt Today!',
+            content: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sediam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat',
+            list: ['Make a difference', 'Unmatched power', 'Retina ready', 'Satisfied clients', 'Control the design', 'Imagine and create'],
+            image: 'http://startit.select-themes.com/wp-content/uploads/2015/10/image-2-home-main.jpg'
+        },
+        user: {
+            name: 'nine',
+            login: 'YES'
+        }
+    };
+</script>
+<script src="./plugin/jquery-3.1.1.min.js"></script>
+</body>
+</html>
