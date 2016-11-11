@@ -30,6 +30,7 @@ export default class Menu extends Component {
             .owl-theme .owl-controls.clickable .owl-page:hover span{
                 background-color: ${color}!important;
             }
+            .app-contact .contact .iconfont {color: ${color}}
             .edit-trigger .icon-rotate .icon-set {color: ${color}}`;
         
     }

@@ -11,9 +11,12 @@ class Gallery extends Component {
                 return <div key={index} className="item">
                     <div className="slide-item" style={{backgroundImage: img}}>
                         <div className="slide-content">
-                            <h4 className="title">{item.title[0]} <br/> {item.title[1]}</h4>
+                            <h4
+                                className="title"
+                                dangerouslySetInnerHTML={{__html: item.title}}
+                            />
                             <p className="desc">{item.content}</p>
-                            <a className="button" href="#">BUY THE THEME</a>
+                            <a className="button" href="#">{item.button}</a>
                         </div>
                     </div>
                 </div>

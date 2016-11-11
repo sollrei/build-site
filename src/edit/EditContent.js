@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {closeEdit, editPrimary} from '../action';
+import {closeEdit, editPrimary} from '../store/action';
 
 export default class EditContent extends Component {
 
@@ -34,15 +34,16 @@ export default class EditContent extends Component {
                 return <div key={index}>
                     <section data-id={item.id} className="edit-section">
                         <h4 className="edit-title">标题</h4>
-                        <textarea data-id={item.id}
-                                  className="title-edit"
-                                  value={item.title}
-                                  onChange={(e) => {
-                                      dispatch(editPrimary({
-                                          id: item.id,
-                                          title: e.nativeEvent.target.value
-                                      }));
-                                  }}
+                        <textarea
+                            data-id={item.id}
+                              className="title-edit"
+                              value={item.title}
+                              onChange={(e) => {
+                                  dispatch(editPrimary({
+                                      id: item.id,
+                                      title: e.nativeEvent.target.value
+                                  }));
+                              }}
                         />
                     </section>
                     <section data-id={item.id} className="edit-section">

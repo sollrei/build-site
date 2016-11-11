@@ -1,20 +1,28 @@
 import React, {Component} from 'react';
-
 import EditTrigger from '../edit/EditTrigger';
 
 export default class PrimarySection extends Component {
-    render () {
 
-        const dom = this.props.data.map((item, index) =>
-            <div key={index} data-id={item.id} className="flex-item edit-wrap">
+    // shouldComponentUpdate () {
+    //     return false;
+    // }
+
+    render () {
+        console.log('render: Primary');
+
+        const {data, editable, onClick} = this.props;
+        const dom = data.map((item) =>
+            <div
+                key={item.id}
+                data-id={item.id}
+                className={editable ? "flex-item edit-wrap" : "flex-item"}
+            >
                 <div className="iconfont">
-                    <span className={item.icon + ' theme-ft-color'}>&nbsp;</span>
+                    <span className={item.icon + ' theme-ft-color'} />
                 </div>
                 <h3>{item.title}</h3>
                 <p>{item.content}</p>
-                <EditTrigger onClick={() => {
-                    this.props.onClick(item.id);
-                }} />
+                { editable && <EditTrigger onClick={onClick.bind(null, item.id)} /> }
             </div>
         );
 
@@ -28,6 +36,4 @@ export default class PrimarySection extends Component {
             </section>
         )
     }
-
 };
-

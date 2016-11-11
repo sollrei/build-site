@@ -5,71 +5,56 @@ import { connect } from 'react-redux';
  * Page component
  * */
 
-import Header from './components/Header';
-import Gallery from './components/Gallery';
-import PrimarySection from './components/Primary';
-import FullWidth from './components/Full';
-import LeftContent from './components/LeftContent';
-import RightContent from './components/RightContent';
-import ImageGallery from './components/ImageGallery';
-import Footer from './components/Footer';
-
 import Menu from './edit/Menu';
 import EditContent from './edit/EditContent';
-import {editSection} from './action';
+import EditButton from './edit/EditButton';
+import {changeEditable} from './store/action';
 
-import './index.css';
 import './style.css';
 
 class App extends Component {
 
+    savePageData () {
+        const data = this.props.route.getState();
+        window.localStorage.setItem('siteData', JSON.stringify(data))
+    }
+
     render() {
 
-        const {getState, dispatch, slide, primary, full, leftContent, imageGallery, rightContent} = this.props;
+        const {dispatch} = this.props;
 
         return (
             <div className="app-wrap">
-                <div className="save"
-                     onClick={() => {
-                         const data = getState();
-                         window.localStorage.setItem('siteData', JSON.stringify(data))
-                     }}
-                >保存设置</div>
-                <div className="App">
-                    <Header />
-                    <Gallery
-                        data={slide}
-                    />
-                    <PrimarySection
-                        data={primary}
-                        onClick={(id) => {
-                            dispatch(editSection({
-                                type: 'primary',
-                                id: id
-                            }))
-                        }}
-                    />
-                    <FullWidth
-                        section={full.section}
-                        data={full.data}
-                    />
-                    <LeftContent
-                        data={leftContent}
-                    />
-                    <ImageGallery
-                        data={imageGallery}
-                    />
-                    <RightContent
-                        data={rightContent}
-                    />
-                    <Footer />
-                </div>
+                <EditButton
+                    click={() => {
+                        dispatch(changeEditable({
+                            type: 'NOT_EDITABLE'
+                        }));
+                        this.savePageData();
+                        location.reload();
+                    }}
+                    text='保存'
+                    className="button-save"
+                />
+                <EditButton
+                    click={() => {
+                        dispatch(changeEditable({
+                            type: 'EDITABLE'
+                        }));
+                        this.savePageData();
+                        location.reload();
+                    }}
+                    text='编辑'
+                    className="button-edit"
+                />
+                {this.props.children}
                 <Menu />
                 <EditContent {...this.props} />
             </div>
         );
     }
 }
+
 
 const mapStateToProps = (state) => {
     return state;

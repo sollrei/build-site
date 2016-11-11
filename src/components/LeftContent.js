@@ -1,58 +1,47 @@
 import React, {Component} from 'react';
-
+import Editor from '../edit/Editor';
 export default class LeftContent extends Component {
 
-    componentDidMount () {
-        let editor = window.CKEDITOR.inline('editor1', {toolbar: "Basic"} );
-
-        editor.on('change', (evt) => {
-
-        });
-
-        window.CKEDITOR.inline('editor-content', {toolbar: "Basic"} );
-    }
-
     render () {
-        const {data} = this.props;
+        const {data, changeData} = this.props;
 
         return (
-            <div>
-                <section className="app-left-content app-column2">
-                    <div className="layout">
-                        <div className="left">
-                            <h3
-                                className="title editor-wrapper"
-                                id="editor1"
-                                suppressContentEditableWarning
-                                contentEditable
-                            >{data.title}</h3>
-                            <div
-                                id="editor-content"
-                                className="content editor-wrapper"
-                                suppressContentEditableWarning
-                                contentEditable
-                            >{data.content}</div>
-                            <div className="app-flex">
-                                <div className="flex-item">
-                                    { data.list.slice(0,3).map((item, index) => <p key={index}>{item}</p>) }
-                                </div>
-                                <div className="flex-item">
-                                    { data.list.slice(3).map((item, index) => <p key={index}>{item}</p>) }
-                                </div>
+            <section className="app-left-content app-column2">
+                <div className="layout" style={{backgroundImage: 'url(' + data.image + ')'}}>
+                    <div className="left">
+                        <div className="title">
+                            <Editor
+                                editData={data.title}
+                                editEvent={(html) => {
+                                    changeData({
+                                        title: html
+                                    })
+                                }}
+                                ele="h3"
+                            />
+                        </div>
+                        <div className="content">
+                            <Editor
+                                editData={data.content}
+                                editEvent={(html) => {
+                                    changeData({
+                                        content: html
+                                    })
+                                }}
+                            />
+                        </div>
+                        <div className="app-flex">
+                            <div className="flex-item">
+                                { data.list.slice(0,3).map((item, index) => <p key={index}>{item}</p>) }
+                            </div>
+                            <div className="flex-item">
+                                { data.list.slice(3).map((item, index) => <p key={index}>{item}</p>) }
                             </div>
                         </div>
-                        <div className="right app-image">
-                            <img width="551"
-                                 height="500"
-                                 src={data.image}
-                                 className="image"
-                                 alt="a"
-                                 sizes="(max-width: 551px) 100vw, 551px" />
-                        </div>
                     </div>
-                </section>
-            </div>
 
+                </div>
+            </section>
         )
     }
 

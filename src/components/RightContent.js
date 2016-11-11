@@ -1,12 +1,34 @@
 import React from 'react';
+import Editor from '../edit/Editor';
 
-const RightContent = ({data}) => {
+const RightContent = ({data, changeData}) => {
+
+
     return (
         <section className="app-right-content app-column2">
-            <div className="layout">
+            <div className="layout" style={{backgroundImage: 'url(' + data.image + ')'}}>
                 <div className="right">
-                    <h3 className="title">{data.title}</h3>
-                    <p className="content">{data.content}</p>
+                    <div className="title">
+                        <Editor
+                            editData={data.title}
+                            editEvent={(html) => {
+                                changeData({
+                                    title: html
+                                })
+                            }}
+                            ele="h3"
+                        />
+                    </div>
+                    <div className="content">
+                        <Editor
+                            editData={data.content}
+                            editEvent={(html) => {
+                                changeData({
+                                    content: html
+                                })
+                            }}
+                        />
+                    </div>
                     <div className="app-flex">
                         <div className="flex-item">
                             {
@@ -19,14 +41,6 @@ const RightContent = ({data}) => {
                             }
                         </div>
                     </div>
-                </div>
-                <div className="left app-image">
-                    <img width="551"
-                         height="500"
-                         src={data.image}
-                         className="image"
-                         alt="a"
-                         sizes="(max-width: 551px) 100vw, 551px" />
                 </div>
             </div>
         </section>
