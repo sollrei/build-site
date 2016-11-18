@@ -11,12 +11,103 @@ import EditButton from './edit/EditButton';
 import {changeEditable} from './store/action';
 
 import './style.css';
+const interact = window.interact;
 
 class App extends Component {
 
     savePageData () {
         const data = this.props.route.getState();
         window.localStorage.setItem('siteData', JSON.stringify(data))
+    }
+
+    createSVG (ev, el, color, ot, ol, callback) {
+        var dummy = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        dummy.setAttributeNS(null, 'version', '1.1');
+        dummy.setAttributeNS(null, 'width', '100%');
+        dummy.setAttributeNS(null, 'height', '100%');
+        dummy.setAttributeNS(null, 'class', 'paint');
+
+        var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        g.setAttributeNS(null, 'transform',
+            'translate(' + Number(ev.clientX - ol) + ', ' + Number(ev.pageY - ot) + ')');
+
+        var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttributeNS(null, 'cx', 0);
+        circle.setAttributeNS(null, 'cy', 0);
+
+        // 算圆形的直径 (⊙o⊙)这个好厉害
+        circle.setAttributeNS(null, 'r', Math.sqrt(Math.pow(el.offsetWidth,2) + Math.pow(el.offsetHeight,2)));
+        circle.setAttributeNS(null, 'fill', color);
+
+        dummy.appendChild(g);
+        g.appendChild(circle);
+        el.appendChild(dummy);
+
+        callback(dummy);
+    }
+
+    componentDidMount () {
+        console.log('app component did mount');
+        const _ = this;
+
+        interact('.dropzone').dropzone({
+            accept: '.color-span',
+            overlap: 0.75,
+
+            ondropactivate: function (event) {
+                event.target.classList.add('drop-active');
+            },
+
+            ondragenter: function (event) {
+                console.log('event: drag enter');
+
+                var draggableElement = event.relatedTarget,
+                    dropzoneElement = event.target;
+
+                dropzoneElement.classList.add('drop-target');
+                draggableElement.classList.add('can-drop');
+            },
+            ondragleave: function (event) {
+                event.target.classList.remove('drop-target');
+                event.relatedTarget.classList.remove('can-drop');
+            },
+            ondrop: function (event) {
+                const relatedNode = event.relatedTarget, // 被拖拽的span
+                    targetNode = event.target;  // 拖拽目标区域
+
+                console.log(event.dragEvent, targetNode.offsetTop);
+
+                if (targetNode.className.indexOf("drop-bg") > -1 ) {
+                    // targetNode.style.background = relatedNode.style.color;
+                    _.createSVG(event.dragEvent,
+                        targetNode,
+                        relatedNode.style.color,
+                        targetNode.offsetTop, targetNode.offsetLeft,
+                        (svg) => {
+                        setTimeout(() => {
+                            targetNode.classList.add('paint--active');
+                            setTimeout(() => {
+                                targetNode.style.background = relatedNode.style.color;
+                                targetNode.classList.remove('paint--active');
+                                svg.remove();
+                            }, 800);
+                        }, 25);
+                    });
+
+                }
+
+                if (targetNode.className.indexOf("drop-txt") > -1 ) {
+                    targetNode.style.color = relatedNode.style.color;
+                }
+
+
+
+            },
+            ondropdeactivate: function (event) {
+                event.target.classList.remove('drop-active');
+                event.target.classList.remove('drop-target');
+            }
+        });
     }
 
     render() {

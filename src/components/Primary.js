@@ -6,6 +6,9 @@ export default class PrimarySection extends Component {
     // shouldComponentUpdate () {
     //     return false;
     // }
+    componentDidMount () {
+        console.log('primary did mount');
+    }
 
     render () {
         console.log('render: Primary');
@@ -20,20 +23,22 @@ export default class PrimarySection extends Component {
                 <div className="iconfont">
                     <span className={item.icon + ' theme-ft-color'} />
                 </div>
-                <h3>{item.title}</h3>
-                <p>{item.content}</p>
+                <h3 className="dropzone drop-txt">{item.title}</h3>
+                <p className="dropzone drop-txt">{item.content}</p>
                 { editable && <EditTrigger onClick={onClick.bind(null, item.id)} /> }
             </div>
         );
 
         return (
-            <section className="app-primary">
-                <div className="layout">
-                    <div className="app-flex">
-                        {dom}
+            <div className="dropzone drop-bg">
+                <section className="app-primary drop-content">
+                    <div className="layout">
+                        <div className="app-flex">
+                            {dom}
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
         )
     }
 };

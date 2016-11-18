@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
-let doc = document;
+const interact = window.interact;
+const doc = document;
 
 export default class Menu extends Component {
 
@@ -13,26 +14,46 @@ export default class Menu extends Component {
         }
     }
 
-    changeSiteTheme (color) {
-        let eleStyle = doc.getElementById('theme-style');
+    // changeSiteTheme (color) {
+    //     let eleStyle = doc.getElementById('theme-style');
+    //
+    //     if (!eleStyle) {
+    //         const sty = doc.createElement('style');
+    //         sty.id = 'theme-style';
+    //         eleStyle = doc.body.appendChild(sty);
+    //     }
+    //
+    //     eleStyle.innerHTML = `.theme-ft-color { color: ${color}; }
+    //         .theme-bg-color { background-color: ${color}; }
+    //         .app-column2 p:after { background-color: ${color}; }
+    //         .app-nav .active { background: ${color}; }
+    //         .owl-theme .owl-controls .owl-page.active span,
+    //         .owl-theme .owl-controls.clickable .owl-page:hover span{
+    //             background-color: ${color}!important;
+    //         }
+    //         .app-contact .contact .iconfont {color: ${color}}
+    //         .edit-trigger .icon-rotate .icon-set {color: ${color}}`;
+    //
+    // }
 
-        if (!eleStyle) {
-            const sty = doc.createElement('style');
-            sty.id = 'theme-style';
-            eleStyle = doc.body.appendChild(sty);
-        }
+    componentDidMount () {
+        console.log('menu component did mount');
 
-        eleStyle.innerHTML = `.theme-ft-color { color: ${color}; }
-            .theme-bg-color { background-color: ${color}; }
-            .app-column2 p:after { background-color: ${color}; }
-            .app-nav .active { background: ${color}; }
-            .owl-theme .owl-controls .owl-page.active span,
-            .owl-theme .owl-controls.clickable .owl-page:hover span{
-                background-color: ${color}!important;
-            }
-            .app-contact .contact .iconfont {color: ${color}}
-            .edit-trigger .icon-rotate .icon-set {color: ${color}}`;
-        
+        this.interactable = interact('.color-span');
+        this.interactable
+            .draggable({
+                onmove: function (event) {
+                    const target = event.target;
+                    target.style.left = (parseInt(target.style.left, 10)||0) + event.dx + 'px';
+                    target.style.top  = (parseInt(target.style.top, 10 )||0) + event.dy + 'px';
+                },
+                onend: function (event) {
+                    const target = event.target;
+                    target.style.left = 0;
+                    target.style.top = 0;
+                }
+            }).resizable(true);
+
     }
 
     render () {
@@ -55,25 +76,35 @@ export default class Menu extends Component {
                     </div>
                 </div>
                 <nav className="nav">
-                    <p className="title">主题配色</p>
-                    <ul className="color" onClick={(e) => {
+                    <p className="title">拖拽配色</p>
+                    <ul id="color-ul" className="color" onClick={(e) => {
                         if (e.nativeEvent.target.nodeName === 'LI') {
-                            const _index = Number(e.nativeEvent.target.getAttribute('data-index'));
-                            this.setState({
-                                theme: _index
-                            });
+                            //const _index = Number(e.nativeEvent.target.getAttribute('data-index'));
+                            //this.setState({
+                                //theme: _index
+                            //});
 
-                            this.changeSiteTheme(e.nativeEvent.target.getAttribute('data-color'));
+                            //this.changeSiteTheme(e.nativeEvent.target.getAttribute('data-color'));
                         }
 
                     }}>
                         {
-                            ['#b4de50', '#1da9c2','#ff8a00', '#e54e53'].map((item, index) => {
+                            ['#b4de50', '#1da9c2','#ff8a00', '#e54e53', '#fff'].map((item, index) => {
                                 let classname = '';
                                 if (index === this.state.theme) {
                                     classname = 'current';
                                 }
-                                return <li className={classname} data-color={item} data-index={index} key={index} style={{background: item}}>&nbsp;</li>
+                                return <li
+                                    className={classname + ' iconfont'}
+                                    data-color={item}
+                                    data-index={index}
+                                    key={index}
+                                    style={{background: item, position: 'relative'}}>
+                                    <span
+                                        className="color-span icon-water"
+                                        style={{color: item}}
+                                    />
+                                </li>
                             })
                         }
 

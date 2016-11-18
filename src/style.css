@@ -185,13 +185,17 @@ em {
 
 /* primary */
 .app-primary {
-  padding: 50px 0 50px;
   text-align: center; }
+  .app-primary .layout {
+    padding: 50px 0 50px; }
   .app-primary .flex-item {
-    padding: 20px 30px; }
+    padding: 20px 30px;
+    overflow: hidden; }
   .app-primary h3 {
     font-size: 20px;
-    padding: 30px 0; }
+    padding: 30px 0;
+    overflow: hidden;
+    text-overflow: ellipsis; }
   .app-primary p {
     font-size: 14px;
     color: #666; }
@@ -349,7 +353,8 @@ em {
   width: 100px;
   background: #fff;
   transform: translate3d(-100px, 0, 0);
-  transition: transform .3s; }
+  transition: transform .3s;
+  box-shadow: 0 0 8px rgba(211, 211, 211, 0.6); }
   .app-edit .edit-trigger {
     position: absolute;
     height: 40px;
@@ -359,7 +364,8 @@ em {
     border-radius: 0 3px 3px 0;
     background: #fff;
     text-align: center;
-    line-height: 40px; }
+    line-height: 40px;
+    box-shadow: 2px 0 3px rgba(211, 211, 211, 0.6); }
     .app-edit .edit-trigger .iconfont {
       display: block;
       height: 100%;
@@ -383,10 +389,18 @@ em {
       width: 40px;
       border-radius: 3px;
       margin-bottom: 20px;
-      cursor: pointer;
       box-sizing: border-box; }
     .app-edit .color .current {
       border: 2px solid #e3e3e3; }
+    .app-edit .color .color-span {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 36px;
+      width: 36px;
+      font-size: 30px;
+      cursor: move; }
 
 .app-extend {
   transform: translate3d(0, 0, 0); }
@@ -550,3 +564,37 @@ em {
 @media only screen and (max-width: 320px) {
   .app-image-gallery .app-flex {
     flex-direction: column; } }
+
+.drop-bg {
+  padding: 2px;
+  box-sizing: border-box;
+  position: relative; }
+
+.drop-content {
+  position: relative;
+  z-index: 2; }
+
+.drop-bg.drop-target {
+  border: 2px dashed #4791ff;
+  padding: 0; }
+
+.drop-txt.drop-target {
+  text-shadow: 0 0 1px rgba(71, 145, 255, 0.7); }
+
+.paint {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  top: 0; }
+  .paint g {
+    position: relative;
+    cursor: default; }
+  .paint circle {
+    fill-opacity: 0;
+    transform: scale3d(0, 0, 1);
+    transition: transform 0.8s ease-out, fill-opacity 0.4s ease-out; }
+
+.paint--active .paint circle {
+  fill-opacity: 1;
+  transform: scale3d(1, 1, 1); }

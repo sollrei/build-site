@@ -249,9 +249,10 @@ em {
 
 /* primary */
 .app-primary {
-    padding: 50px 0 50px;
     text-align: center;
-
+    .layout {
+        padding: 50px 0 50px;
+    }
     .flex-item {
         padding: 20px 30px;
         overflow: hidden;
@@ -468,6 +469,7 @@ em {
     background: #fff;
     transform: translate3d(-100px, 0, 0);
     transition: transform .3s;
+    box-shadow: 0 0 8px rgba(211,211,211,.6);
     
     .edit-trigger {
         position: absolute;
@@ -479,6 +481,8 @@ em {
         background: #fff;
         text-align: center;
         line-height: 40px;
+        box-shadow: 2px 0 3px rgba(211,211,211,.6);
+
         .iconfont {
             display: block;
             height: 100%;
@@ -510,11 +514,21 @@ em {
             width: 40px;
             border-radius: 3px;
             margin-bottom: 20px;
-            cursor: pointer;
+            //cursor: pointer;
             box-sizing: border-box;
         }
         .current {
             border: 2px solid #e3e3e3;
+        }
+        .color-span {
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 36px;
+            width: 36px;    
+            font-size: 30px;
+            cursor: move;
         }
     }
 }
@@ -728,4 +742,48 @@ em {
             flex-direction: column;
         }
     }
+}
+
+.drop-bg {
+    padding: 2px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.drop-content {
+    position: relative;
+    z-index: 2;
+}
+
+.drop-bg.drop-target {
+
+    border: 2px dashed $editColor;
+    padding: 0;
+}
+
+.drop-txt.drop-target {
+    text-shadow: 0 0 1px rgba($editColor, .7);
+}
+
+.paint {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    g {
+        position: relative;
+        cursor: default;
+    }
+    circle {
+        fill-opacity: 0;
+        transform: scale3d(0,0,1);
+        transition: transform 0.8s ease-out, fill-opacity 0.4s ease-out;
+    }
+}
+
+
+.paint--active .paint circle {
+    fill-opacity: 1;
+    transform: scale3d(1,1,1);
 }
