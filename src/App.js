@@ -10,8 +10,10 @@ import EditContent from './edit/EditContent';
 import EditButton from './edit/EditButton';
 import {changeEditable} from './store/action';
 
+
 import './style.css';
 const interact = window.interact;
+const doc = document;
 
 class App extends Component {
 
@@ -21,21 +23,16 @@ class App extends Component {
     }
 
     createSVG (ev, el, color, ot, ol, callback) {
-        var dummy = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        dummy.setAttributeNS(null, 'version', '1.1');
-        dummy.setAttributeNS(null, 'width', '100%');
-        dummy.setAttributeNS(null, 'height', '100%');
-        dummy.setAttributeNS(null, 'class', 'paint');
+        const dummy = doc.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        const g = doc.createElementNS('http://www.w3.org/2000/svg', 'g');
+        const circle = doc.createElementNS("http://www.w3.org/2000/svg", "circle");
 
-        var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        dummy.setAttributeNS(null, 'version', '1.1');
+        dummy.setAttributeNS(null, 'class', 'paint');
         g.setAttributeNS(null, 'transform',
             'translate(' + Number(ev.clientX - ol) + ', ' + Number(ev.pageY - ot) + ')');
-
-        var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         circle.setAttributeNS(null, 'cx', 0);
         circle.setAttributeNS(null, 'cy', 0);
-
-        // 算圆形的直径 (⊙o⊙)这个好厉害
         circle.setAttributeNS(null, 'r', Math.sqrt(Math.pow(el.offsetWidth,2) + Math.pow(el.offsetHeight,2)));
         circle.setAttributeNS(null, 'fill', color);
 
@@ -73,22 +70,20 @@ class App extends Component {
             },
             ondrop: function (event) {
                 const relatedNode = event.relatedTarget, // 被拖拽的span
-                    targetNode = event.target;  // 拖拽目标区域
-
-                console.log(event.dragEvent, targetNode.offsetTop);
+                    targetNode = event.target,  // 拖拽目标区域
+                    color = relatedNode.style.color;
 
                 if (targetNode.className.indexOf("drop-bg") > -1 ) {
-                    // targetNode.style.background = relatedNode.style.color;
                     _.createSVG(event.dragEvent,
                         targetNode,
-                        relatedNode.style.color,
+                        color,
                         targetNode.offsetTop, targetNode.offsetLeft,
                         (svg) => {
                         setTimeout(() => {
-                            targetNode.classList.add('paint--active');
+                            targetNode.classList.add('paint-active');
                             setTimeout(() => {
-                                targetNode.style.background = relatedNode.style.color;
-                                targetNode.classList.remove('paint--active');
+                                targetNode.style.background = color;
+                                targetNode.classList.remove('paint-active');
                                 svg.remove();
                             }, 800);
                         }, 25);
@@ -97,10 +92,8 @@ class App extends Component {
                 }
 
                 if (targetNode.className.indexOf("drop-txt") > -1 ) {
-                    targetNode.style.color = relatedNode.style.color;
+                    targetNode.style.color = color;
                 }
-
-
 
             },
             ondropdeactivate: function (event) {

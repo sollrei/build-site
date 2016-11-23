@@ -11,13 +11,27 @@ import Page from './Page';
 
 const history = syncHistoryWithStore(browserHistory, store);
 
+import falcor from 'falcor';
+
+const sModel = new falcor.Model({
+    cache: {
+        todos: [
+            {
+                name: 'get milk from corner store',
+                done: false
+            }
+        ]
+    }
+});
+
+sModel.getValue('todos[0]["name", "done"]').then(name => console.log(name));
+
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <Route path="/" component={App} getState={store.getState}>
-                <IndexRoute component={Home} />
-                <Route path="index" component={Home} />
-                <Route path="page" component={Page} />
+                <IndexRoute component={Home} model={sModel}/>
+                <Route path="page" component={Page} model={sModel}/>
             </Route>
         </Router>
     </Provider>,

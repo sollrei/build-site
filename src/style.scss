@@ -526,7 +526,7 @@ em {
             left: 0;
             top: 0;
             height: 36px;
-            width: 36px;    
+            width: 36px;
             font-size: 30px;
             cursor: move;
         }
@@ -783,7 +783,7 @@ em {
 }
 
 
-.paint--active .paint circle {
+.paint-active .paint circle {
     fill-opacity: 1;
     transform: scale3d(1,1,1);
 }

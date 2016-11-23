@@ -18,8 +18,12 @@ class Home extends Component {
     render () {
 
         const {dispatch,
-            slide, primary, full, leftContent, imageGallery, rightContent, editable
+            slide, primary, full, leftContent, imageGallery, rightContent, editable, route
         } = this.props;
+
+        const Model = route.model;
+
+        console.log(Model.getValue('siteData.slide[0].id'));
 
         return (
             <div className="App">

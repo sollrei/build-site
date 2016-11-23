@@ -71,7 +71,7 @@ export default class Menu extends Component {
                        }}
                     >
                         <div className="icon-rotate">
-                            <span className="icon-set"></span>
+                            <span className="icon-set" />
                         </div>
                     </div>
                 </div>
@@ -86,7 +86,6 @@ export default class Menu extends Component {
 
                             //this.changeSiteTheme(e.nativeEvent.target.getAttribute('data-color'));
                         }
-
                     }}>
                         {
                             ['#b4de50', '#1da9c2','#ff8a00', '#e54e53', '#fff'].map((item, index) => {
@@ -109,6 +108,7 @@ export default class Menu extends Component {
                         }
 
                     </ul>
+
                 </nav>
             </div>
         )

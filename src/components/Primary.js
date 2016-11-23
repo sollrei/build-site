@@ -3,9 +3,6 @@ import EditTrigger from '../edit/EditTrigger';
 
 export default class PrimarySection extends Component {
 
-    // shouldComponentUpdate () {
-    //     return false;
-    // }
     componentDidMount () {
         console.log('primary did mount');
     }
@@ -30,7 +27,21 @@ export default class PrimarySection extends Component {
         );
 
         return (
-            <div className="dropzone drop-bg">
+            <div className="dropzone drop-bg"
+                onDrop={(e) => {
+                    console.log(e.nativeEvent)
+                    console.log('mi drag onDrop')
+                }}
+                 onDragOver={(ev) => {
+                     console.log(ev.nativeEvent)
+                     ev.preventDefault();
+
+                     return true;
+                 }}
+                 onDragLeave={() => {
+                     console.log('drag leave')
+                 }}
+            >
                 <section className="app-primary drop-content">
                     <div className="layout">
                         <div className="app-flex">
