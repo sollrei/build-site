@@ -1,6 +1,5 @@
 import {combineReducers, createStore} from 'redux';
 import {routerReducer} from 'react-router-redux';
-
 let storage = window.localStorage.getItem('siteData');
 
 let initial = storage ? JSON.parse(storage) : window.siteData;

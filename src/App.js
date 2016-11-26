@@ -105,7 +105,8 @@ class App extends Component {
 
     render() {
 
-        const {dispatch} = this.props;
+        const {dispatch, state} = this.props;
+        const editContent = state.get('editContent');
 
         return (
             <div className="app-wrap">
@@ -133,7 +134,7 @@ class App extends Component {
                 />
                 {this.props.children}
                 <Menu />
-                <EditContent {...this.props} />
+                <EditContent dispatch={dispatch} editContent={editContent} state={state} />
             </div>
         );
     }
@@ -141,7 +142,9 @@ class App extends Component {
 
 
 const mapStateToProps = (state) => {
-    return state;
+    return {
+        state: state
+    };
 };
 
 const ConnectedIndex = connect(mapStateToProps)(App);

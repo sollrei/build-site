@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 const interact = window.interact;
-const doc = document;
+// const doc = document;
 
 export default class Menu extends Component {
 
