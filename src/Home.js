@@ -24,14 +24,13 @@ class Home extends Component {
         } = this.props;
 
 
-        const primary = state.get('primary');
-        const editable = state.get('editable');
-        const slide = state.get('slide');
-        const full = state.get('full');
-
-        const leftContent = state.get('leftContent');
-        const imageGallery = state.get('imageGallery');
-        const rightContent = state.get('rightContent');
+        const primary = state.get('primary'),
+            editable = state.get('editable'),
+            slide = state.get('slide'),
+            full = state.get('full'),
+            leftContent = state.get('leftContent'),
+            imageGallery = state.get('imageGallery'),
+            rightContent = state.get('rightContent');
 
         return (
             <div className="App">
