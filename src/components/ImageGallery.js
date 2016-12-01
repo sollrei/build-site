@@ -2,7 +2,9 @@ import React from 'react';
 
 const ImageGallery = ({data}) => {
 
-    const dom = data.map((item, index) =>
+    const d = data.toJS();
+
+    const dom = d.map((item, index) =>
         <section data-id={item.id} key={index} className="flex-item">
             <img src={item.img} alt=""/>
             <div className="circle"></div>

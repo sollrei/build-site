@@ -106,6 +106,7 @@ class App extends Component {
     render() {
 
         const {dispatch, state} = this.props;
+
         const editContent = state.get('editContent');
 
         return (

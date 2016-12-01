@@ -2,17 +2,17 @@ import React, {Component} from 'react';
 import Header from './components/Header';
 import Gallery from './components/Gallery';
 import PrimarySection from './components/Primary';
-// import FullWidth from './components/Full';
-// import LeftContent from './components/LeftContent';
-// import RightContent from './components/RightContent';
-// import ImageGallery from './components/ImageGallery';
+import FullWidth from './components/Full';
+import LeftContent from './components/LeftContent';
+import RightContent from './components/RightContent';
+import ImageGallery from './components/ImageGallery';
 import Footer from './components/Footer';
 
 import { connect } from 'react-redux';
 
 
 import {editSection,
-    // editLeftContent, editFull, editRightContent
+    editLeftContent, editFull, editRightContent
 } from './store/action';
 
 class Home extends Component {
@@ -27,6 +27,11 @@ class Home extends Component {
         const primary = state.get('primary');
         const editable = state.get('editable');
         const slide = state.get('slide');
+        const full = state.get('full');
+
+        const leftContent = state.get('leftContent');
+        const imageGallery = state.get('imageGallery');
+        const rightContent = state.get('rightContent');
 
         return (
             <div className="App">
@@ -44,28 +49,27 @@ class Home extends Component {
                         }))
                     }}
                 />
-                {/*<FullWidth*/}
-                    {/*section={full.section}*/}
-                    {/*data={full.data}*/}
-                    {/*changeData={(data) => {*/}
-                        {/*dispatch(editFull(data));*/}
-                    {/*}}*/}
-                {/*/>*/}
-                {/*<LeftContent*/}
-                    {/*data={leftContent}*/}
-                    {/*changeData={(data) => {*/}
-                        {/*dispatch(editLeftContent(data));*/}
-                    {/*}}*/}
-                {/*/>*/}
-                {/*<ImageGallery*/}
-                    {/*data={imageGallery}*/}
-                {/*/>*/}
-                {/*<RightContent*/}
-                    {/*data={rightContent}*/}
-                    {/*changeData={(data) => {*/}
-                        {/*dispatch(editRightContent(data));*/}
-                    {/*}}*/}
-                {/*/>*/}
+                <FullWidth
+                    data={full}
+                    changeData={(data) => {
+                        dispatch(editFull(data));
+                    }}
+                />
+                <LeftContent
+                    data={leftContent}
+                    changeData={(data) => {
+                        dispatch(editLeftContent(data));
+                    }}
+                />
+                <ImageGallery
+                    data={imageGallery}
+                />
+                <RightContent
+                    data={rightContent}
+                    changeData={(data) => {
+                        dispatch(editRightContent(data));
+                    }}
+                />
                 <Footer />
             </div>
         )

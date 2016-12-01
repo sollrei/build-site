@@ -3,15 +3,16 @@ import Editor from '../edit/Editor';
 
 const RightContent = ({data, changeData}) => {
 
+    const d = data.toJS();
 
     return (
         <div className="dropzone drop-bg">
             <section className="app-right-content app-column2 drop-content">
-                <div className="layout" style={{backgroundImage: 'url(' + data.image + ')'}}>
+                <div className="layout" style={{backgroundImage: 'url(' + d.image + ')'}}>
                     <div className="right">
                         <div className="title dropzone drop-txt">
                             <Editor
-                                editData={data.title}
+                                editData={d.title}
                                 editEvent={(html) => {
                                     changeData({
                                         title: html
@@ -22,7 +23,7 @@ const RightContent = ({data, changeData}) => {
                         </div>
                         <div className="content dropzone drop-txt">
                             <Editor
-                                editData={data.content}
+                                editData={d.content}
                                 editEvent={(html) => {
                                     changeData({
                                         content: html
@@ -33,12 +34,12 @@ const RightContent = ({data, changeData}) => {
                         <div className="app-flex dropzone drop-txt">
                             <div className="flex-item">
                                 {
-                                    data.list.slice(0,3).map((item, index) => <p key={index}>{item}</p>)
+                                    d.list.slice(0,3).map((item, index) => <p key={index}>{item}</p>)
                                 }
                             </div>
                             <div className="flex-item">
                                 {
-                                    data.list.slice(3).map((item, index) => <p key={index}>{item}</p>)
+                                    d.list.slice(3).map((item, index) => <p key={index}>{item}</p>)
                                 }
                             </div>
                         </div>

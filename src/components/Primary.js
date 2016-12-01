@@ -5,6 +5,7 @@ import Immutable from 'immutable';
 export default class PrimarySection extends Component {
 
     shouldComponentUpdate (nextProps, nextState) {
+
         return !Immutable.is(nextProps.data, this.props.data);
     }
 

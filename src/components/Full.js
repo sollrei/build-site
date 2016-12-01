@@ -3,29 +3,33 @@ import Editor from '../edit/Editor';
 
 export default class FullWidth extends Component {
 
-    shouldComponentUpdate () {
-        return false;
+    shouldComponentUpdate (nextProps, nextState) {
+        return !Immutable.is(nextProps.data, this.props.data);
     }
 
     render () {
 
         console.log('render: full');
 
-        const {data, section, changeData} = this.props;
+        const {data, changeData} = this.props;
 
-        const dom = data.map((item, index) =>
+        const d = data.get('data'),
+            section = data.get('section');
+
+
+        const dom = d.map((item, index) =>
             <div
                 key={index}
-                data-id={item.id}
+                data-id={item.get('id')}
                 className="flex-item"
             >
                 <div className="text-title">
                     <Editor
-                        editData={item.title}
+                        editData={item.get('title')}
                         editEvent={(html) => {
                             changeData({
                                 data: {
-                                    id: item.id,
+                                    id: item.get('id'),
                                     title: html
                                 }
                             });
@@ -34,11 +38,11 @@ export default class FullWidth extends Component {
                 </div>
                 <div className="text-main">
                     <Editor
-                        editData={item.content}
+                        editData={item.get('content')}
                         editEvent={(html) => {
                             changeData({
                                 data: {
-                                    id: item.id,
+                                    id: item.get('id'),
                                     content: html
                                 }
                             });
@@ -51,11 +55,11 @@ export default class FullWidth extends Component {
         return (
             <section className="app-full">
                 <div className="full-img"
-                     style={{backgroundImage: 'url(' + section.img + ')', height: '500px'}}
+                     style={{backgroundImage: 'url(' + section.get('img') + ')', height: '500px'}}
                 >
                     <div className="title">
                         <Editor
-                            editData={section.title}
+                            editData={section.get('title')}
                             editEvent={(html) => {
                                 changeData({
                                     section: {
@@ -67,7 +71,7 @@ export default class FullWidth extends Component {
                     </div>
                     <div className="desc">
                         <Editor
-                            editData={section.desc}
+                            editData={section.get('desc')}
                             editEvent={(html) => {
                                 changeData({
                                     section: {
