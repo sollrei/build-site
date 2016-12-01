@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 class Page extends Component {
     render () {
         const {editable} = this.props;
+
         return (
             <div className="app-page">
                 <Header />
@@ -38,7 +39,7 @@ class Page extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        editable: state.editable
+        editable: state.get('editable')
     };
 };
 

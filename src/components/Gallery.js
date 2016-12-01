@@ -1,11 +1,19 @@
 import React, {Component} from 'react';
+import Immutable from 'immutable';
 
 import OwlCarousel from 'react-owl-carousel';
+
 class Gallery extends Component {
+
+    shouldComponentUpdate (nextProps, nextState) {
+        return !Immutable.is(nextProps.data, this.props.data);
+    }
 
     render () {
 
-        let dom = this.props.data.map((item, index) =>
+        console.log('render slide');
+
+        let dom = this.props.data.toJS().map((item, index) =>
             {
                 const img = 'url(' + item.image + ')';
                 return <div key={index} className="item">

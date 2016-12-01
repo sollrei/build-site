@@ -11,50 +11,54 @@ export default class EditContent extends Component {
     }
 
     render () {
-        const {dispatch, editContent} = this.props;
+        const {dispatch, editContent, state} = this.props;
 
-        let classN = editContent.edit
+        let classN = editContent.get('edit')
             ? 'edit-box show'
             : 'edit-box',
             data,
             dom = <div>hi</div>;
 
-        const d = editContent.data;
-
+        const d = editContent.get('data');
 
         if (d) {
-            data = this.props[d.type];
+            const type = d.get('type');
+            data = state.get(type);
 
-            const dt = data.filter((item) => {
-                return item.id === d.id;
+            const dt = data.filter(item => {
+                return item.get('id') === d.get('id');
             });
 
             dom = dt.map((item, index) => {
 
+                const id = item.get('id'),
+                    title = item.get('title'),
+                    content = item.get('content');
+
                 return <div key={index}>
-                    <section data-id={item.id} className="edit-section">
+                    <section data-id={id} className="edit-section">
                         <h4 className="edit-title">标题</h4>
                         <textarea
-                            data-id={item.id}
+                            data-id={id}
                               className="title-edit"
-                              value={item.title}
+                              value={title}
                               onChange={(e) => {
                                   dispatch(editPrimary({
-                                      id: item.id,
+                                      id: id,
                                       title: e.nativeEvent.target.value
                                   }));
                               }}
                         />
                     </section>
-                    <section data-id={item.id} className="edit-section">
+                    <section data-id={id} className="edit-section">
                         <h4 className="edit-title">内容</h4>
                         <textarea
-                            data-id={item.id}
+                            data-id={id}
                             className="content-edit"
-                            value={item.content}
+                            value={content}
                             onChange={(e) => {
                                 dispatch(editPrimary({
-                                    id: item.id,
+                                    id: id,
                                     content: e.nativeEvent.target.value
                                 }));
                             }}

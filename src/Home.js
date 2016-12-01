@@ -11,19 +11,26 @@ import Footer from './components/Footer';
 import { connect } from 'react-redux';
 
 
-import {editSection, editLeftContent, editFull, editRightContent} from './store/action';
+import {editSection,
+    editLeftContent, editFull, editRightContent
+} from './store/action';
 
 class Home extends Component {
 
     render () {
 
-        const {dispatch,
-            slide, primary, full, leftContent, imageGallery, rightContent, editable, route
+        const {dispatch, state,
+            // , route
         } = this.props;
 
-        const Model = route.model;
 
-        console.log(Model.getValue('siteData.slide[0].id'));
+        const primary = state.get('primary'),
+            editable = state.get('editable'),
+            slide = state.get('slide'),
+            full = state.get('full'),
+            leftContent = state.get('leftContent'),
+            imageGallery = state.get('imageGallery'),
+            rightContent = state.get('rightContent');
 
         return (
             <div className="App">
@@ -42,8 +49,7 @@ class Home extends Component {
                     }}
                 />
                 <FullWidth
-                    section={full.section}
-                    data={full.data}
+                    data={full}
                     changeData={(data) => {
                         dispatch(editFull(data));
                     }}
@@ -71,7 +77,9 @@ class Home extends Component {
 
 
 const mapStateToProps = (state) => {
-    return state;
+    return {
+        state: state
+    };
 };
 
 const ConnectedIndex = connect(mapStateToProps)(Home);
