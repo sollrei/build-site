@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Editor from '../edit/Editor';
+import Immutable from 'immutable';
 
 export default class LeftContent extends Component {
 
