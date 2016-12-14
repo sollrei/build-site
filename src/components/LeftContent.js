@@ -9,7 +9,7 @@ export default class LeftContent extends Component {
     }
 
     render () {
-        console.log('render leftcontent');
+        console.log('render left content');
 
         const {data, changeData} = this.props;
 

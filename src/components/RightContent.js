@@ -9,6 +9,7 @@ class RightContent extends Component {
     }
 
     render () {
+        console.log('render rightContent');
         const {data, changeData} = this.props;
         const d = data.toJS();
 

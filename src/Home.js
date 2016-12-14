@@ -19,18 +19,9 @@ class Home extends Component {
 
     render () {
 
-        const {dispatch, state,
-            // , route
+        const { dispatch,
+            primary, editable, slide, full, leftContent, imageGallery, rightContent
         } = this.props;
-
-
-        const primary = state.get('primary'),
-            editable = state.get('editable'),
-            slide = state.get('slide'),
-            full = state.get('full'),
-            leftContent = state.get('leftContent'),
-            imageGallery = state.get('imageGallery'),
-            rightContent = state.get('rightContent');
 
         return (
             <div className="App">
@@ -78,7 +69,13 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        state: state
+        primary: state.get('primary'),
+        editable: state.get('editable'),
+        slide: state.get('slide'),
+        full: state.get('full'),
+        leftContent: state.get('leftContent'),
+        imageGallery: state.get('imageGallery'),
+        rightContent: state.get('rightContent')
     };
 };
 

@@ -8,6 +8,8 @@ class ImageGallery extends Component {
     }
 
     render () {
+        console.log('render image gallery');
+
         const {data} = this.props;
         const d = data.toJS();
 
